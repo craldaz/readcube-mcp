@@ -1,5 +1,25 @@
-"""Utility functions and helpers."""
+"""Utility functions and helpers for Query2Label system."""
 
-# Placeholders - will be implemented in Phase 2.5
+from .config import (
+    Query2LabelConfig,
+    DSPyConfig,
+    LoggingConfig,
+    DataConfig,
+    PerformanceConfig,
+    MCPConfig,
+    ConfigManager,
+    get_config,
+    load_config
+)
 
-__all__ = []
+__all__ = [
+    "Query2LabelConfig",
+    "DSPyConfig", 
+    "LoggingConfig",
+    "DataConfig",
+    "PerformanceConfig",
+    "MCPConfig",
+    "ConfigManager",
+    "get_config",
+    "load_config"
+]
