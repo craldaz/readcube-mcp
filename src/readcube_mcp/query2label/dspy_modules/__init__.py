@@ -1,5 +1,19 @@
 """DSPy modules for query processing and translation."""
 
-# Placeholders - will be implemented in Phase 2.3
+from .signatures import (
+    QueryParser,
+    LabelMatcher,
+    BooleanQueryParser,
+    ConceptExtractor,
+    LabelValidator,
+)
 
-__all__ = []
+# Placeholders for translators and validators - will be implemented in Phase 2.3-2.4
+
+__all__ = [
+    "QueryParser",
+    "LabelMatcher", 
+    "BooleanQueryParser",
+    "ConceptExtractor",
+    "LabelValidator",
+]
