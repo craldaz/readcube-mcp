@@ -1,8 +1,8 @@
 readcube_mcp
 ==============================
 [//]: # (Badges)
-[![GitHub Actions Build Status](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/readcube_mcp/workflows/CI/badge.svg)](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/readcube_mcp/actions?query=workflow%3ACI)
-[![codecov](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/readcube_mcp/branch/main/graph/badge.svg)](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/readcube_mcp/branch/main)
+[![GitHub Actions Build Status](https://github.com/craldaz/readcube-mcp/workflows/CI/badge.svg)](https://github.com/craldaz/readcube-mcp/actions?query=workflow%3ACI)
+[![codecov](https://codecov.io/gh/craldaz/readcube_mcp/branch/main/graph/badge.svg)](https://codecov.io/gh/craldaz/readcube_mcp/branch/main)
 
 
 LLM tools for querying scientific papers in your library using their labels.
