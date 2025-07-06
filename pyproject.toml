@@ -103,7 +103,7 @@ include-package-data = false
 [tool.setuptools.packages.find]
 namespaces = false
 where = ["src"]
-include = ["readcube_mcp", "query2label"]
+include = ["readcube_mcp*"]
 
 
 # Ref https://setuptools.pypa.io/en/latest/userguide/datafiles.html#package-data
@@ -111,7 +111,7 @@ include = ["readcube_mcp", "query2label"]
 readcube_mcp = [
     "py.typed",
 ]
-query2label = [
+"readcube_mcp.query2label" = [
     "py.typed",
     "data/*.csv",
     "data/*.dat",
@@ -158,7 +158,7 @@ extend-exclude = '''
 profile = "black"
 multi_line_output = 3
 line_length = 88
-known_first_party = ["readcube_mcp", "query2label"]
+known_first_party = ["readcube_mcp"]
 
 [tool.mypy]
 python_version = "3.8"
@@ -192,7 +192,6 @@ addopts = [
     "--strict-markers",
     "--disable-warnings",
     "--cov=readcube_mcp",
-    "--cov=query2label",
     "--cov-report=term-missing",
     "--cov-report=html",
     "--cov-report=xml",

@@ -6,10 +6,10 @@ Unit and regression tests for the query2label package.
 import sys
 import pytest
 
-# Test imports
-import query2label
-from query2label.core import BooleanQuery, QueryType, QueryResult, ParsedQuery, LabelMatch
-from query2label.core.exceptions import (
+# Test imports - import from readcube_mcp package since that's what gets installed
+import readcube_mcp.query2label as query2label
+from readcube_mcp.query2label.core import BooleanQuery, QueryType, QueryResult, ParsedQuery, LabelMatch
+from readcube_mcp.query2label.core.exceptions import (
     Query2LabelError,
     QueryTranslationError,
     LabelValidationError,
@@ -20,7 +20,7 @@ from query2label.core.exceptions import (
 
 def test_query2label_imported():
     """Test that query2label package can be imported."""
-    assert "query2label" in sys.modules
+    assert "readcube_mcp.query2label" in sys.modules
 
 
 def test_core_types_imported():
