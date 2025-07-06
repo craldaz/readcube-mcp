@@ -58,3 +58,11 @@ class PaperFilterError(Query2LabelError):
         super().__init__(message)
         self.query = query
         self.paper_count = paper_count
+
+
+class DataProcessingError(Query2LabelError):
+    """Raised when data processing operations fail."""
+    
+    def __init__(self, message: str, details: dict = None):
+        super().__init__(message)
+        self.details = details or {}

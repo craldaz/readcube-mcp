@@ -13,6 +13,7 @@ from . import utils
 # Main interfaces (only what's implemented)
 from .core import BooleanQuery, QueryType, QueryResult, ParsedQuery, LabelMatch
 from .dspy_modules import QueryToLabelsTranslator, AdvancedQueryTranslator
+from .data import PaperFilter, PaperDataLoader
 
 __version__ = "0.1.0"
 
@@ -24,6 +25,8 @@ __all__ = [
     "LabelMatch",
     "QueryToLabelsTranslator",
     "AdvancedQueryTranslator",
+    "PaperFilter",
+    "PaperDataLoader",
     "core",
     "dspy_modules", 
     "data",
