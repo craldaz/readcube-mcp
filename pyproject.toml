@@ -12,8 +12,7 @@ readme = "README.md"
 authors = [
     { name = "Cody Aldaz", email = "codyaldaz@gmail.com" }
 ]
-license = {text = "MIT"}
-license-files = ["LICENSE"]
+license = "MIT"
 # See https://pypi.org/classifiers/
 classifiers = [
     "Development Status :: 4 - Beta",
