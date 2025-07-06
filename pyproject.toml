@@ -103,6 +103,8 @@ include-package-data = false
 [tool.setuptools.packages.find]
 namespaces = false
 where = ["src"]
+include = ["readcube_mcp", "query2label", "mcp_server"]
+
 
 # Ref https://setuptools.pypa.io/en/latest/userguide/datafiles.html#package-data
 [tool.setuptools.package-data]
