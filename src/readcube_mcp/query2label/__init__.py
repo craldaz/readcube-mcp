@@ -12,6 +12,7 @@ from . import utils
 
 # Main interfaces (only what's implemented)
 from .core import BooleanQuery, QueryType, QueryResult, ParsedQuery, LabelMatch
+from .dspy_modules import QueryToLabelsTranslator, AdvancedQueryTranslator
 
 __version__ = "0.1.0"
 
@@ -21,6 +22,8 @@ __all__ = [
     "QueryResult",
     "ParsedQuery",
     "LabelMatch",
+    "QueryToLabelsTranslator",
+    "AdvancedQueryTranslator",
     "core",
     "dspy_modules", 
     "data",

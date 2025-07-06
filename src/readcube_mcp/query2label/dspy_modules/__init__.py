@@ -7,13 +7,34 @@ from .signatures import (
     ConceptExtractor,
     LabelValidator,
 )
-
-# Placeholders for translators and validators - will be implemented in Phase 2.3-2.4
+from .validators import (
+    label_validation_reward,
+    create_label_validation_reward,
+    format_labels_with_counts,
+    validate_labels_against_database,
+    generate_validation_feedback,
+    calculate_label_frequencies,
+)
+from .translators import (
+    QueryToLabelsTranslator,
+    AdvancedQueryTranslator,
+)
 
 __all__ = [
+    # Signatures
     "QueryParser",
     "LabelMatcher", 
     "BooleanQueryParser",
     "ConceptExtractor",
     "LabelValidator",
+    # Validators
+    "label_validation_reward",
+    "create_label_validation_reward", 
+    "format_labels_with_counts",
+    "validate_labels_against_database",
+    "generate_validation_feedback",
+    "calculate_label_frequencies",
+    # Translators
+    "QueryToLabelsTranslator",
+    "AdvancedQueryTranslator",
 ]
