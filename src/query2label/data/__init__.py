@@ -1,11 +1,5 @@
 """Data handling and processing utilities."""
 
-from .loaders import PaperDataLoader
-from .processors import LabelProcessor
-from .filters import PaperFilter
+# Placeholders - will be implemented in Phase 2.4
 
-__all__ = [
-    "PaperDataLoader",
-    "LabelProcessor", 
-    "PaperFilter",
-]
+__all__ = []
