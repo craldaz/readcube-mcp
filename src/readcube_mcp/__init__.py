@@ -1,35 +1,27 @@
-"""Readcube-MCP: MCP Server with Query2Label Integration.
+"""Readcube-MCP: Model Context Protocol Server for Scientific Paper Search.
 
-Model Context Protocol server that provides natural language query capabilities
-for scientific paper databases, powered by the Query2Label algorithm.
+An MCP server that provides natural language query capabilities for scientific 
+paper databases, powered by the Query2Label algorithm with DSPy Refine.
 """
-
-# Import both sub-packages
-from . import query2label
-from . import mcp_server
-
-# Main interfaces from query2label
-from .query2label import BooleanQuery, QueryType, QueryResult
-from .query2label import AdvancedQueryTranslator, PaperDataLoader, PaperFilter
-
-# Main interfaces from mcp_server
-from .mcp_server import ReadcubeMCPServer
-
-# Legacy imports for backward compatibility
-from .readcube_mcp import *
 
 from ._version import __version__
 
+# Import Query2Label algorithm
+try:
+    from ..query2label import BooleanQuery, QueryType, QueryResult
+    from ..query2label import AdvancedQueryTranslator, PaperDataLoader, PaperFilter
+except ImportError:
+    # Query2Label not implemented yet
+    pass
+
+# MCP Server components (when implemented)
+try:
+    from .server import ReadcubeMCPServer
+    from .handlers import QueryHandler, PaperHandler
+except ImportError:
+    # MCP server components not implemented yet
+    pass
+
 __all__ = [
-    # Query2Label exports
-    "BooleanQuery",
-    "QueryType", 
-    "QueryResult",
-    "AdvancedQueryTranslator",
-    "PaperDataLoader",
-    "PaperFilter",
-    "query2label",
-    # MCP Server exports
-    "ReadcubeMCPServer",
-    "mcp_server",
+    "__version__",
 ]
