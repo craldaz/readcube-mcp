@@ -7,7 +7,7 @@ paper format used by the Query2Label system.
 
 import pandas as pd
 import json
-from typing import List, Dict, Set, Any, Optional, Union
+from typing import List, Dict, Set, Any, Optional, Union, Tuple
 from pathlib import Path
 from collections import Counter
 from ..core.exceptions import DataProcessingError
@@ -405,3 +405,40 @@ class PaperDataLoader:
             List of sample papers
         """
         return self.papers_db[:n] if self.papers_db else []
+
+    def load_csv_with_counts(
+        self, 
+        file_path: Union[str, Path], 
+        column_mappings: Optional[Dict[str, str]] = None
+    ) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
+        """Load papers from CSV file and return both papers and label counts.
+        
+        This method is specifically designed for fusion processing where both
+        the paper data and label usage statistics are needed.
+        
+        Args:
+            file_path: Path to CSV file
+            column_mappings: Optional mapping of CSV columns to paper fields
+            
+        Returns:
+            Tuple of (papers, label_counts) where:
+            - papers: List of paper dictionaries
+            - label_counts: Dictionary mapping labels to occurrence counts
+            
+        Raises:
+            DataProcessingError: If CSV loading fails
+        """
+        try:
+            # Load papers using existing method
+            papers = self.load_csv(file_path, column_mappings)
+            
+            # Get label counts (calculated during load_csv)
+            label_counts = self.get_label_counts()
+            
+            return papers, label_counts
+            
+        except Exception as e:
+            raise DataProcessingError(
+                f"Failed to load CSV with counts from {file_path}: {str(e)}",
+                {"file_path": str(file_path), "error_type": type(e).__name__}
+            )

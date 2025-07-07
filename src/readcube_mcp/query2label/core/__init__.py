@@ -6,6 +6,8 @@ from .types import (
     QueryResult,
     ParsedQuery,
     LabelMatch,
+    FusionResult,
+    FusionConfig,
 )
 from .exceptions import (
     Query2LabelError,
@@ -24,6 +26,8 @@ __all__ = [
     "QueryResult",
     "ParsedQuery",
     "LabelMatch",
+    "FusionResult",
+    "FusionConfig",
     # Exceptions
     "Query2LabelError",
     "QueryTranslationError",

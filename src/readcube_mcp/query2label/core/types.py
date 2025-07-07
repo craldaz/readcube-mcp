@@ -1,7 +1,7 @@
 """Core data structures and types for Query2Label system."""
 
 from dataclasses import dataclass
-from typing import Set, Optional, Dict, Any
+from typing import Set, Optional, Dict, Any, List
 from enum import Enum
 
 
@@ -175,3 +175,89 @@ class LabelMatch:
     def is_valid(self) -> bool:
         """Check if this match has valid labels."""
         return bool(self.matched_labels) and self.confidence > 0
+
+
+@dataclass
+class FusionResult:
+    """Results from RAG fusion processing.
+    
+    Contains the final fused papers along with metadata about the fusion process,
+    including sub-queries used, individual results, and fusion scores.
+    """
+    papers: List[Dict[str, Any]]           # Final fused and ranked papers
+    sub_queries: List[str]                 # Sub-queries that were processed
+    boolean_queries: List[BooleanQuery]    # Translated boolean queries for each sub-query
+    fusion_scores: Dict[str, float]        # Paper ID → fusion score mapping
+    individual_results: Dict[str, List[Dict[str, Any]]]  # Sub-query → papers mapping
+    strategy_used: str                     # "simple" or "fusion"
+    total_papers_before_fusion: int        # Sum of all individual results
+    
+    def improvement_ratio(self) -> float:
+        """Calculate improvement over best single sub-query.
+        
+        Returns the ratio of fused results to the best individual sub-query.
+        A ratio > 1.0 indicates fusion found more papers than any single query.
+        """
+        if not self.individual_results:
+            return 1.0
+        max_single = max(len(papers) for papers in self.individual_results.values())
+        return len(self.papers) / max(max_single, 1)
+    
+    def coverage_per_query(self) -> Dict[str, int]:
+        """Get number of papers found by each sub-query."""
+        return {query: len(papers) for query, papers in self.individual_results.items()}
+    
+    def __str__(self) -> str:
+        """Human-readable string representation."""
+        return (
+            f"FusionResult(strategy={self.strategy_used}, "
+            f"papers={len(self.papers)}, "
+            f"sub_queries={len(self.sub_queries)}, "
+            f"improvement={self.improvement_ratio():.1f}x)"
+        )
+    
+    def __repr__(self) -> str:
+        """Detailed representation for debugging."""
+        return (
+            f"FusionResult("
+            f"papers={len(self.papers)} items, "
+            f"sub_queries={self.sub_queries}, "
+            f"strategy_used={self.strategy_used!r}, "
+            f"total_papers_before_fusion={self.total_papers_before_fusion}, "
+            f"improvement_ratio={self.improvement_ratio():.2f})"
+        )
+
+
+@dataclass
+class FusionConfig:
+    """Configuration for fusion processing.
+    
+    Controls various aspects of the fusion algorithm including the RRF parameter,
+    result limits, and sub-query constraints.
+    """
+    k: int = 60                           # RRF constant (higher = less weight on rank differences)
+    max_results: int = 50                 # Maximum papers to return after fusion
+    min_sub_queries: int = 2              # Minimum sub-queries needed to trigger fusion
+    max_sub_queries: int = 5              # Maximum sub-queries to process
+    complexity_threshold: float = 0.7     # Threshold for automatic fusion (0-1 scale)
+    enable_deduplication: bool = True     # Whether to deduplicate similar sub-queries
+    
+    def __str__(self) -> str:
+        """Human-readable string representation."""
+        return (
+            f"FusionConfig(k={self.k}, "
+            f"max_results={self.max_results}, "
+            f"sub_queries={self.min_sub_queries}-{self.max_sub_queries})"
+        )
+    
+    def __repr__(self) -> str:
+        """Detailed representation for debugging."""
+        return (
+            f"FusionConfig("
+            f"k={self.k}, "
+            f"max_results={self.max_results}, "
+            f"min_sub_queries={self.min_sub_queries}, "
+            f"max_sub_queries={self.max_sub_queries}, "
+            f"complexity_threshold={self.complexity_threshold}, "
+            f"enable_deduplication={self.enable_deduplication})"
+        )
